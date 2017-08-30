@@ -8,9 +8,17 @@ $app = new Silex\Application();
 
 $app['debug'] = true;
 
-$app->get('/hello', function () {
 
-    return 'Hello World!';
+$app->register(new Silex\Provider\TwigServiceProvider(), [
+    'twig.path' => __DIR__.'/../views',
+]);
+
+
+
+$app->get('/bookings/create', function () use ($app) { // http://localhost:8000/hello  return hello world
+
+    return $app['twig']->render('base.html.twig');
+
 });
 
 
